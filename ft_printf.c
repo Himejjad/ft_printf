@@ -12,50 +12,32 @@
 
 #include "ft_printf.h"
 
-int	len2(unsigned long int n)
-{
-	int	x;
-
-	x = 0;
-	if (n == 0)
-		return (1);
-	if (n < 0)
-	{
-		n = n * -1;
-	}
-	while (n > 0)
-	{
-		x++;
-		n /= 16;
-	}
-	return (x);
-}
-
-
 int	ft_print_adr(unsigned long n)
 {
 	char			*hex;
-	unsigned long	x;
+	int	i;
 
-	x = n;
+	 i = 0;
 	hex = "0123456789abcdef";
 	if (n >= 16)
 	{
-		ft_print_adr(n / 16);
-		ft_print_adr(n % 16);
+		i += ft_print_adr(n / 16);
+		i += ft_print_adr(n % 16);
 	}
 	else
-		write(1, &hex[n], 1);
-	return (len(x));
+		i += ft_putchar(hex[n]);
+	return (i);
 }
 
 int	ft_adr(unsigned long n)
 {
-	ft_putstr("0x");
-	ft_print_adr(n);
-	return (len2(n) + 2);
-}
+	int i;
 
+	i = 2;
+	ft_putstr("0x");
+	i += ft_print_adr(n);
+	return (i);
+}
 int	ft_check(char c, va_list args)
 {
 	if (c == 'c')
@@ -77,22 +59,18 @@ int	ft_check(char c, va_list args)
 	return (0);
 }
 
-int	ft_printf(const char *s, ...)
+int	ft_printf(const char *format, ...)
 {
 	va_list	args;
 	int		x;
-	char	*format;
 
-	format = (char *)s;
-	va_start (args, s);
+	va_start (args, format);
 	x = 0;
 	while (*format)
 	{
 		if (*format == '%')
 		{
 			format++;
-			if (!*format)
-				return (x);
 			x += ft_check(*format, args);
 		}
 		else
@@ -102,3 +80,13 @@ int	ft_printf(const char *s, ...)
 	va_end (args);
 	return (x);
 }
+// int main ()
+// {
+// 	int i;
+// 	i += 1;
+// 	int *ptr;
+// 	ptr = &i;
+// 	ft_printf("%u\n", *ptr);
+// 	printf("%u", *ptr);
+// }
+

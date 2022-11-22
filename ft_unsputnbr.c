@@ -17,7 +17,7 @@ int	ft_unsputnbr(unsigned int nb)
 	int	i;
 
 	i = 0;
-	if (nb > 9)
+	if (nb >= 10)
 	{
 		i += ft_unsputnbr(nb / 10);
 		i += ft_unsputnbr(nb % 10);
