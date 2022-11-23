@@ -15,8 +15,8 @@
 int	ft_hexalow(unsigned int n)
 {
 	char			*hex;
-	 int	i;
-	
+	int				i;
+
 	i = 0;
 	hex = "0123456789abcdef";
 	if (n >= 16)
@@ -32,8 +32,8 @@ int	ft_hexalow(unsigned int n)
 int	ft_hexaup(unsigned int n)
 {
 	char			*hex;
-	 int	i;
-	
+	int				i;
+
 	i = 0;
 	hex = "0123456789ABCDEF";
 	if (n >= 16)

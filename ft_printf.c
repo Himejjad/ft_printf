@@ -15,9 +15,9 @@
 int	ft_print_adr(unsigned long n)
 {
 	char			*hex;
-	int	i;
+	int				i;
 
-	 i = 0;
+	i = 0;
 	hex = "0123456789abcdef";
 	if (n >= 16)
 	{
@@ -31,13 +31,14 @@ int	ft_print_adr(unsigned long n)
 
 int	ft_adr(unsigned long n)
 {
-	int i;
+	int	i;
 
 	i = 2;
 	ft_putstr("0x");
 	i += ft_print_adr(n);
 	return (i);
 }
+
 int	ft_check(char c, va_list args)
 {
 	if (c == 'c')
@@ -46,7 +47,7 @@ int	ft_check(char c, va_list args)
 		return (ft_putstr(va_arg(args, char *)));
 	else if (c == 'p')
 		return (ft_adr(va_arg(args, unsigned long)));
-	else if (c == 'd' || c == 'i')
+	else if (c == 'i' || c == 'd')
 		return (ft_putnbr(va_arg(args, int)));
 	else if (c == 'u')
 		return (ft_unsputnbr(va_arg(args, unsigned int)));
@@ -62,31 +63,23 @@ int	ft_check(char c, va_list args)
 int	ft_printf(const char *format, ...)
 {
 	va_list	args;
+	int		i;
 	int		x;
 
-	va_start (args, format);
+	i = 0;
 	x = 0;
-	while (*format)
+	va_start(args, format);
+	while (format[i])
 	{
-		if (*format == '%')
+		if (format[i] == '%')
 		{
-			format++;
-			x += ft_check(*format, args);
+			i++;
+			x += ft_check(format[i], args);
 		}
 		else
-			x += ft_putchar(*format);
-		format++;
+	x += ft_putchar(format[i]);
+	i++;
 	}
-	va_end (args);
+	va_end(args);
 	return (x);
 }
-// int main ()
-// {
-// 	int i;
-// 	i += 1;
-// 	int *ptr;
-// 	ptr = &i;
-// 	ft_printf("%u\n", *ptr);
-// 	printf("%u", *ptr);
-// }
-

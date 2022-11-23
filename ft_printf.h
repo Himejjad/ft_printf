@@ -23,7 +23,7 @@ int	ft_putstr(char *s);
 int	ft_unsputnbr(unsigned int nb);
 int	ft_hexalow(unsigned int n);
 int	ft_hexaup(unsigned int n);
-int	ft_printf(const char *s, ...);
+int	ft_printf(const char *format, ...);
 int	ft_check(char c, va_list args);
 int	ft_adr(unsigned long n);
 int	ft_print_adr(unsigned long n);
