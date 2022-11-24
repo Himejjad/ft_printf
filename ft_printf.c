@@ -6,7 +6,7 @@
 /*   By: himejjad <himejjad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 04:55:04 by himejjad          #+#    #+#             */
-/*   Updated: 2022/11/18 05:03:17 by himejjad         ###   ########.fr       */
+/*   Updated: 2022/11/24 02:38:34 by himejjad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	ft_check(char c, va_list args)
 		return (ft_putstr(va_arg(args, char *)));
 	else if (c == 'p')
 		return (ft_adr(va_arg(args, unsigned long)));
-	else if (c == 'i' || c == 'd')
+	else if (c == 'd' || c == 'i')
 		return (ft_putnbr(va_arg(args, int)));
 	else if (c == 'u')
 		return (ft_unsputnbr(va_arg(args, unsigned int)));
@@ -63,23 +63,23 @@ int	ft_check(char c, va_list args)
 int	ft_printf(const char *format, ...)
 {
 	va_list	args;
-	int		i;
 	int		x;
+	int		i;
 
-	i = 0;
+	va_start (args, format);
 	x = 0;
-	va_start(args, format);
+	i = 0;
 	while (format[i])
 	{
-		if (format[i] == '%')
+		if (format[i] == '%' && format[i + 1])
 		{
 			i++;
 			x += ft_check(format[i], args);
 		}
-		else
-	x += ft_putchar(format[i]);
-	i++;
+		else if (format[i] != '%')
+			x += ft_putchar(format[i]);
+		i++;
 	}
-	va_end(args);
+	va_end (args);
 	return (x);
 }
